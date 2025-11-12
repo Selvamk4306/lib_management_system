@@ -1,1 +1,0 @@
-# lib_mamagement_system
