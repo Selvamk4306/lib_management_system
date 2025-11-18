@@ -1,17 +1,7 @@
 const express = require("express");
-const users= require("./data/users.json")
+const users = require("../data/users.json")
 
-    const userRoutes = require("./routes/users");
-    const bookRoutes = require("./routes/books");
-
-    const app = express();
-    const port = 3000
-
-    app.use(express.json())
-
-    app.use("/users", userRoutes);
-    app.use("/books", bookRoutes);
-
+const router = express.Router()
     /**
      * Route: /user
      * Method: GET
@@ -20,14 +10,14 @@ const users= require("./data/users.json")
      * Paramters: None
      */
 
-    app.get("/", (req, res) => {
+    router.get("/", (req, res) => {
         res.status(200).json({
             success: true,
             data: users
         })
     })
 
-    app.get("/:id", (req, res) => {
+    router.get("/:id", (req, res) => {
 
         const { id } = req.params;
         const user = users.find((each) => each.id === id);
@@ -53,7 +43,7 @@ const users= require("./data/users.json")
      * Paramters: None
      */
 
-    app.post("/", (req, res) => {
+    router.post("/", (req, res) => {
 
         const {id, name, email, subscriptionType, subscriptionStart, subscriptionEnd, hasIssuedBooks, pendingFine} = req.body
         if(!id || !name || !email || !subscriptionType || !subscriptionStart || !subscriptionEnd || !hasIssuedBooks || pendingFine === undefined){
@@ -94,7 +84,7 @@ const users= require("./data/users.json")
      * Paramters: None
      */
 
-    app.put("/:id", (req, res) => {
+    router.put("/:id", (req, res) => {
         const { id } = req.params;
         const {data} = req.body;
         
@@ -131,7 +121,7 @@ const users= require("./data/users.json")
      * Paramters: None
      */
 
-    app.delete("/:id", (req, res) => {
+    router.delete("/:id", (req, res) => {
         const { id } = req.params
 
         const user = users.find((each) => each.id === id)
@@ -155,17 +145,9 @@ const users= require("./data/users.json")
 
         res.status(200).json({
             success: true,
-            data: updateU,
+            data: updateU,  
             message: "User deleted successfully"
         })
     })
 
-    // app.all("*", (req, res) => {
-    //     res.status(500).json({
-    //         message: "Not build yet"
-    //     })
-    // })
-
-    app.listen(port, () => 
-        console.log(`Server is listeneing on port http://localhost:${port}`)
-    )
+module.exports = router;
