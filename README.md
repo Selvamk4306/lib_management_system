@@ -53,3 +53,10 @@ npm i nodemon --save-dev
 
 to restore node_modules, packet_lock.json -> npm i/npm install
 
+## MVC Architecture
+
+    >> M: Model (Structure of MongoDB)
+    >> V: View (Frontend)
+    >> C: Controllers (Brain/Logic of a route)
+
+## DTO (Data Transfer Object)

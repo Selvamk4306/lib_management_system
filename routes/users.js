@@ -45,8 +45,8 @@ const router = express.Router()
 
     router.post("/", (req, res) => {
 
-        const {id, name, email, subscriptionType, subscriptionStart, subscriptionEnd, hasIssuedBooks, pendingFine} = req.body
-        if(!id || !name || !email || !subscriptionType || !subscriptionStart || !subscriptionEnd || !hasIssuedBooks || pendingFine === undefined){
+        const {id, name, email, issuedBook, issuedDate, returnDate, subscriptionType, subscriptionDate} = req.body
+        if(!id || !name || !email || !issuedBook || !issuedDate || !returnDate || !subscriptionType || !subscriptionDate === undefined){
             return res.status(400).json({
                 success: false,
                 message: "All fields are required"
@@ -63,11 +63,11 @@ const router = express.Router()
             id,
             name,
             email,
+            issuedBook,
+            issuedDate,
+            returnDate,
             subscriptionType,
-            subscriptionStart,
-            subscriptionEnd,
-            hasIssuedBooks,
-            pendingFine}
+            subscriptionDate}
         )
 
         res.status(201).json({

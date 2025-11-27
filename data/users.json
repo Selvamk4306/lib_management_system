@@ -1,52 +1,41 @@
-[
-  {
-    "id": "1",
-    "name": "Arun Kumar",
-    "email": "arun@example.com",
-    "subscriptionType": "Basic",
-    "subscriptionStart": "2025-01-10",
-    "subscriptionEnd": "2025-03-10",
-    "hasIssuedBooks": true,
-    "pendingFine": 40
-  },
-  {
-    "id": "2",
-    "name": "Priya Sharma",
-    "email": "priya@example.com",
-    "subscriptionType": "Standard",
-    "subscriptionStart": "2025-02-01",
-    "subscriptionEnd": "2025-08-01",
-    "hasIssuedBooks": false,
-    "pendingFine": 0
-  },
-  {
-    "id": "3",
-    "name": "Rahul Verma",
-    "email": "rahul@example.com",
-    "subscriptionType": "Premium",
-    "subscriptionStart": "2024-10-20",
-    "subscriptionEnd": "2025-10-20",
-    "hasIssuedBooks": true,
-    "pendingFine": 0
-  },
-  {
-    "id": "4",
-    "name": "Sneha Iyer",
-    "email": "sneha@example.com",
-    "subscriptionType": "Basic",
-    "subscriptionStart": "2025-03-05",
-    "subscriptionEnd": "2025-05-05",
-    "hasIssuedBooks": false,
-    "pendingFine": 0
-  },
-  {
-    "id": "5",
-    "name": "Vijay Menon",
-    "email": "vijay@example.com",
-    "subscriptionType": "Standard",
-    "subscriptionStart": "2024-11-15",
-    "subscriptionEnd": "2025-05-15",
-    "hasIssuedBooks": true,
-    "pendingFine": 75
+{
+    "users": [
+      {
+        "id": "1",
+        "name": "Rohan",
+        "email": "rohan@email.com",
+        "issuedBook": "1",
+        "issuedDate": "04/01/2022",
+        "returnDate": "05/01/2022",
+        "subscriptionType": "Premium",
+        "subscriptionDate": "04/01/2022"
+      },
+      {
+        "id": "2",
+        "name": "Kamal",
+        "email": "kamal@email.com",
+        "issuedBook": "2",
+        "issuedDate": "01/07/2021",
+        "returnDate": "01/10/2021",
+        "subscriptionType": "Basic",
+        "subscriptionDate": "03/01/2022"
+      },
+      {
+        "id": "3",
+        "name": "Jenifer",
+        "email": "jenni@email.com",
+        "issuedBook": "3",
+        "issuedDate": "01/07/2021",
+        "returnDate": "01/10/2021",
+        "subscriptionType": "Basic",
+        "subscriptionDate": "01/01/2022"
+      },
+      {
+        "id": "4",
+        "name": "Alex",
+        "email": "aex@email.com",
+        "subscriptionType": "Premium",
+        "subscriptionDate": "01/01/2022"
+      }
+    ]
   }
-]
