@@ -10,30 +10,36 @@ const router = express.Router()
      * Paramters: None
      */
 
-    router.get("/", (req, res) => {
-        res.status(200).json({
-            success: true,
-            data: users
-        })
-    })
+    const { UserModel, BookModel } = require("../models");
+    const { getAllusers, getUserbyId, addNewUser, updateUserById, deleteUserById } = require("../controllers/user-controller");
 
-    router.get("/:id", (req, res) => {
+    router.get("/", getAllusers);  // Get all users controller method
+    // router.get("/", (req, res) => {
+    //     res.status(200).json({
+    //         success: true,
+    //         data: users
+    //     })
+    // })
 
-        const { id } = req.params;
-        const user = users.find((each) => each.id === id);
+    
+    router.get("/:id", getUserbyId);  // Get user by ID controller method
+    // router.get("/:id", (req, res) => {
 
-        if(!user){
-            return res.status(404).json({
-                success: false,
-                message: "User not found"
-            })
-        }
+    //     const { id } = req.params;
+    //     const user = users.find((each) => each.id === id);
 
-        res.status(200).json({
-            success: true,
-            data: user
-        })
-    })
+    //     if(!user){
+    //         return res.status(404).json({
+    //             success: false,
+    //             message: "User not found"
+    //         })
+    //     }
+
+    //     res.status(200).json({
+    //         success: true,
+    //         data: user
+    //     })
+    // })
 
     /**
      * Route: /user
@@ -43,38 +49,39 @@ const router = express.Router()
      * Paramters: None
      */
 
-    router.post("/", (req, res) => {
+    router.post("/", addNewUser);  // New user controller method
+    // router.post("/", (req, res) => {
 
-        const {id, name, email, issuedBook, issuedDate, returnDate, subscriptionType, subscriptionDate} = req.body
-        if(!id || !name || !email || !issuedBook || !issuedDate || !returnDate || !subscriptionType || !subscriptionDate === undefined){
-            return res.status(400).json({
-                success: false,
-                message: "All fields are required"
-            })
-        }
-        const user = users.find((each) => each.id === id);
-        if(user){
-            return res.status(400).json({
-                success: false,
-                message: `User already exists with id ${id}`
-            })
-        }
-        users.push({
-            id,
-            name,
-            email,
-            issuedBook,
-            issuedDate,
-            returnDate,
-            subscriptionType,
-            subscriptionDate}
-        )
+    //     const {id, name, email, issuedBook, issuedDate, returnDate, subscriptionType, subscriptionDate} = req.body
+    //     if(!id || !name || !email || !issuedBook || !issuedDate || !returnDate || !subscriptionType || !subscriptionDate === undefined){
+    //         return res.status(400).json({
+    //             success: false,
+    //             message: "All fields are required"
+    //         })
+    //     }
+    //     const user = users.find((each) => each.id === id);
+    //     if(user){
+    //         return res.status(400).json({
+    //             success: false,
+    //             message: `User already exists with id ${id}`
+    //         })
+    //     }
+    //     users.push({
+    //         id,
+    //         name,
+    //         email,
+    //         issuedBook,
+    //         issuedDate,
+    //         returnDate,
+    //         subscriptionType,
+    //         subscriptionDate}
+    //     )
 
-        res.status(201).json({
-            success: true,
-            data: "User created successfully "
-        })
-    })
+    //     res.status(201).json({
+    //         success: true,
+    //         data: "User created successfully "
+    //     })
+    // })
 
     /**
      * Route: /user
@@ -84,34 +91,35 @@ const router = express.Router()
      * Paramters: None
      */
 
-    router.put("/:id", (req, res) => {
-        const { id } = req.params;
-        const {data} = req.body;
+    router.put("/:id", updateUserById); // Updating user controller method
+    // router.put("/:id", (req, res) => {
+    //     const { id } = req.params;
+    //     const {data} = req.body;
         
-        const user = users.find((each) => each.id === id)
-        if(!user){
-            return res.status(404).json({
-                success: false,
-                message: "User not found"
-            })
-        }
-    // with spread operator
-        const UpdateU = users.map((each) => {
-            if(each.id === id){
-                return{
-                    ...each,
-                    ...data
-                }
-            }
-            return each 
-        })
+    //     const user = users.find((each) => each.id === id)
+    //     if(!user){
+    //         return res.status(404).json({
+    //             success: false,
+    //             message: "User not found"
+    //         })
+    //     }
+    // // with spread operator
+    //     const UpdateU = users.map((each) => {
+    //         if(each.id === id){
+    //             return{
+    //                 ...each,
+    //                 ...data
+    //             }
+    //         }
+    //         return each 
+    //     })
 
-        res.status(200).json({
-            success: true,
-            data: UpdateU,
-            message: "User updated successfully"
-        })
-    })
+    //     res.status(200).json({
+    //         success: true,
+    //         data: UpdateU,
+    //         message: "User updated successfully"
+    //     })
+    // })
 
     /**
      * Route: /user
@@ -121,33 +129,35 @@ const router = express.Router()
      * Paramters: None
      */
 
-    router.delete("/:id", (req, res) => {
-        const { id } = req.params
 
-        const user = users.find((each) => each.id === id)
-        if(!user){
-            return res.status(404).json({
-                success: false,
-                message: `user not found with id ${id}`
-            })
-        }
+    router.delete("/:id", deleteUserById); // Deleting user controller method
+    // router.delete("/:id", (req, res) => {
+    //     const { id } = req.params
 
-        //if user exists, filter it out from the users array
+    //     const user = users.find((each) => each.id === id)
+    //     if(!user){
+    //         return res.status(404).json({
+    //             success: false,
+    //             message: `user not found with id ${id}`
+    //         })
+    //     }
 
-        //const updateU = users.filter((each) => each.id !== id)
+    //     //if user exists, filter it out from the users array
 
-        // Second method
+    //     //const updateU = users.filter((each) => each.id !== id)
 
-        const index = users.indexOf(user);
-        users.splice(index, 1);
+    //     // Second method
 
-        const updateU = users;
+    //     const index = users.indexOf(user);
+    //     users.splice(index, 1);
 
-        res.status(200).json({
-            success: true,
-            data: updateU,  
-            message: "User deleted successfully"
-        })
-    })
+    //     const updateU = users;
+
+    //     res.status(200).json({
+    //         success: true,
+    //         data: updateU,  
+    //         message: "User deleted successfully"
+    //     })
+    // })
 
 module.exports = router;
