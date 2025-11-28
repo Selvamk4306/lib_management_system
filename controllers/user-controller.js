@@ -74,3 +74,53 @@ exports.deleteUserById = async(req, res) => {
         message: "User Deleted Successfully"
     })
 }
+
+exports.getSubscriptionDetailsById = async(req, res) => {
+    const { id } = req.params;
+    const user = UserModel.find((id).lean());
+        if(!user){
+            return res.status(404).json({
+                success: false,
+                message: "User not found"
+            })
+        }
+
+        const getDateinDays = (date = "") => {
+            if(data){
+                date = new Date(data);
+            }else{
+                date = new Date();
+            }
+            let days = Math.floor(date / (1000*60*60*24));
+            return days;
+        }
+
+        const subscriptionType = (date) => {
+            if(user.subscriptionType === "Basic"){
+                date = date + 90; 
+            }else if(user.subscriptionType === "Standard"){
+                date = date + 180;
+            }else if(user.subscriptionType === "Premium"){
+                date = date + 365;
+            }
+            return date;
+        }
+        let returnDate = getDateinDays(user.returnDate); 
+        let currentDate = getDateinDays();
+        let subscriptionDate = getDateinDays(user.subscriptionDate);
+        let subscriptionExpiration = subscriptionType(subscriptionDate);
+
+        const data = {
+            ...user,
+            subscriptionExpired: subscriptionExpiration < currentDate,
+            subscriptionDaysLeft: subscriptionExpiration - currentDate,
+            daysLeftForExpiration: returnDate - currentDate,
+            returnDate: returnDate < currentDate ? "Book is overdue" : returnDate,
+            fine: returnDate < currentDate ? subscriptionExpiration <= currentDate ? 200 : 100 : 0
+        }
+
+        res.status(200).json({
+            success: true,
+            data
+        })
+    }   

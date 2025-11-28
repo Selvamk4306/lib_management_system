@@ -11,7 +11,7 @@ const router = express.Router()
      */
 
     const { UserModel, BookModel } = require("../models");
-    const { getAllusers, getUserbyId, addNewUser, updateUserById, deleteUserById } = require("../controllers/user-controller");
+    const { getAllusers, getUserbyId, addNewUser, updateUserById, deleteUserById, getSubscriptionDetailsById} = require("../controllers/user-controller");
 
     router.get("/", getAllusers);  // Get all users controller method
     // router.get("/", (req, res) => {
@@ -160,4 +160,55 @@ const router = express.Router()
     //     })
     // })
 
+    router.get('/subscription-details/:id', getSubscriptionDetailsById);
+
+    // router.get("/subscription-type/:id", (req, res) => {
+    //     const { id } = req.params;
+    //     const user = users.find((each) => each.id === id);
+    //     if(!user){
+    //         return res.status(404).json({
+    //             success: false,
+    //             message: "User not found"
+    //         })
+    //     }
+    //     const getDateinDays = (date = "") => {
+    //         let date;
+    //         if(data){
+    //             date = new Date(data);
+    //         }else{
+    //             date = new Date();
+    //         }
+    //         let days = Math.floor(date / (1000*60*60*24));
+    //         return days;
+    //     }
+
+    //     const subscriptionType = (date) => {
+    //         if(user.subscriptionType === "Basic"){
+    //             date = date + 90; 
+    //         }else if(user.subscriptionType === "Standard"){
+    //             date = date + 180;
+    //         }else if(user.subscriptionType === "Premium"){
+    //             date = date + 365;
+    //         }
+    //         return date;
+    //     }
+    //     let returnDate = getDateinDays(user.returnDate); 
+    //     let currentDate = getDateinDays();
+    //     let subscriptionDate = getDateinDays(user.subscriptionDate);
+    //     let subscriptionExpiration = subscriptionType(subscriptionDate);
+
+    //     const data = {
+    //         ...user,
+    //         subscriptionExpired: subscriptionExpiration < currentDate,
+    //         subscriptionDaysLeft: subscriptionExpiration - currentDate,
+    //         daysLeftForExpiration: returnDate - currentDate,
+    //         returnDate: returnDate < currentDate ? "Book is overdue" : returnDate,
+    //         fine: returnDate < currentDate ? subscriptionExpiration <= currentDate ? 200 : 100 : 0
+    //     }
+
+    //     res.status(200).json({
+    //         success: true,
+    //         data
+    //     })
+    // })
 module.exports = router;
